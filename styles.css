@@ -1,0 +1,233 @@
+
+/*FONTS*/
+@font-face {
+	font-family: "NerdFont";
+	src: url("fonts/JetBrainsMonoNerdFont-Medium.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "NerdFont";
+	src: url("fonts/JetBrainsMonoNerdFont-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "NerdFont";
+	src: url("fonts/JetBrainsMonoNerdFont-Italic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "NerdFont";
+	src: url("fonts/JetBrainsMonoNerdFont-BoldItalic.ttf") format("truetype");
+	font-weight: bold;
+	font-style: italic;
+}
+
+/*ELEMS*/
+body {
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'NerdFont', monospace;
+	font-weight: bold;
+	font-style: normal;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+button {
+	padding: 10px 20px;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	margin: 10px 10px 10px 10px;
+	border-radius: 5px;
+	font-family: 'NerdFont', monospace;
+	font-weight: bold;
+	font-style: normal;
+	transition: transform 0.1s ease-in-out;
+}
+
+button:hover.move-left {
+	transform: translateX(-40px);
+}
+
+button:hover.move-right {
+	transform: translateX(40px);
+}
+
+button:hover.move-up {
+	transform: translateY(-15px);
+}
+
+button:hover.move-down {
+	transform: translateY(15px);
+}
+
+.banner-buttons-right {
+	position: fixed;
+	top: 0.5%;
+	left: 0.5%;
+	width: 99%;
+	z-index: 9999;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: flex-end;
+}
+
+.source-code {
+	position: fixed;
+	top: 0.5%;
+	left: 0.5%;
+	width: 99%;
+	z-index: 9999;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: flex-end;
+	font-family: 'NerdFont', monospace;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.banner-buttons-left {
+	position: fixed;
+	top: 0.5%;
+	left: 0.5%;
+	width: 99%;
+	z-index: 9999;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+p {
+	font-size: 20px;
+	padding-left: 16px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px;
+	font-family: 'NerdFont', monospace;
+
+}
+
+.about-header {
+	padding-left: 16px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px 5px 0px 0px;
+	margin-bottom: 0px;
+	font-family: 'NerdFont', monospace;
+	position: absolute;
+    top: 0;
+    left: 0;
+}
+.about-header,
+
+p.about {
+	max-width: 43.45%;
+	margin-top: -5px;
+
+}
+
+.banner {
+	margin-left: -18px;
+	margin-right: -18px;
+	margin-top: -8px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+/*THEME*/
+body {
+	background-color: #2E3440;
+	color: #81A1C1;
+}
+
+/*body:not(.no-oglo) {
+	background-image: url("background-dark.png");
+}*/
+
+button {
+	background-color: #8FBCBB;
+	color: #2E3440;
+	border-bottom: 8px solid #6f9e9d;
+}
+
+button:hover {
+	background-color: #88C0D0;
+	border-bottom: 8px solid #88C0D0;
+}
+
+p {
+	background-color: #4C566A;
+	border-bottom: 8px solid #434C5E;
+}
+
+.about-header {
+	background-color: #3B4252;
+	color: #81A1C1;
+}
+
+.title-bar {
+	background-color: #2151c2;
+	color: #c9d5e0;
+}
+
+.banner {
+	background-color: #4C566A;
+	border-bottom: 8px solid #434C5E;
+}
+
+
+
+/* TERMINAL */
+#terminal-container {
+    border-bottom: 8px solid #434C5E; 
+    border-radius: 8px; 
+    overflow: hidden; 
+	width: 40%;
+	position: relative;
+
+	padding-left: 800px;
+	padding-top: 0px;
+	padding-bottom: 200px;
+
+}
+
+#terminal-container .xterm-viewport {
+    border-radius: 8px; 
+	padding-left: 10px; 
+    padding-right: 10px;
+	padding-top: 30px; 
+
+}
+
+#terminal-container .xterm-viewport::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari, Opera) */
+}
+
+#terminal-container .xterm-viewport > :first-child {
+    padding-top: 30px; /* Add top padding to the first child (terminal content) */
+}
+
+#terminal-container .term-header {
+    padding-left: 16px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px 5px 0px 0px;
+	margin-bottom: 0px;
+    font-family: 'NerdFont', monospace;
+    background-color: #3B4252;
+    color: #81A1C1; 
+ 
+}
