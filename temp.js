@@ -7,11 +7,6 @@ function format(string) {
 function ls(args) {
 	term.writeln(Object.keys(files).join(' '));
 
-	/*if (args.length == 1 && args[0] == '-1') {
-		term.writeln(`Files...`);
-		return;
-	}
-	term.writeln('Arg present');*/
 }
 
 function help(args) {
@@ -57,8 +52,19 @@ const commands = {
 };
 
 const ABOUT = format(`
-I love CICD pipelines, CLI tools, and cloud infrastructure. 
-Shout out to the internet. I also like to go outside on occasion.   
+Currently learning: 
+	- AWS Solutions Architect
+	- Devops
+	- Golang
+My desktop setup:
+	- NixOs unstable
+	- Hyprland (customised)
+	- Alacritty shell (zsh)
+Interests: 
+	- Music
+	- Movies
+	- The internet 
+	 
 `);
 
 const CONTACT = format(`
@@ -69,8 +75,8 @@ LinkdIn: https://www.linkedin.com/in/michael-savedra-3a4597144/
 
 const README = format(`
 This website and my CV are hosted for free using Terraform 
-and AWS with a full deployemt pipeline. To see teh source 
-code visit https://
+and AWS with a full deployemt pipeline. To see the source 
+code visit: https://github.com/savedra1/website
 `);
 
 const files = {
@@ -81,7 +87,7 @@ const files = {
 
 
 let term = new Terminal({
-	cols: 60,
+	cols: 80,
 	rows: 20,
 	fontSize: 15,
 	cursorBlink: true,

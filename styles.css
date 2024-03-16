@@ -30,14 +30,23 @@
 
 /*ELEMS*/
 body {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
 	font-family: 'NerdFont', monospace;
 	font-weight: bold;
 	font-style: normal;
 	background-repeat: no-repeat;
 	background-size: contain;
-}
+	overflow: hidden;
+
+	background-image: url('./ZE9ZvL4.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed; 
+	margin: 0; 
+	height: 100vh; 
+  }
 
 button {
 	padding: 10px 20px;
@@ -52,32 +61,6 @@ button {
 	transition: transform 0.1s ease-in-out;
 }
 
-button:hover.move-left {
-	transform: translateX(-40px);
-}
-
-button:hover.move-right {
-	transform: translateX(40px);
-}
-
-button:hover.move-up {
-	transform: translateY(-15px);
-}
-
-button:hover.move-down {
-	transform: translateY(15px);
-}
-
-.banner-buttons-right {
-	position: fixed;
-	top: 0.5%;
-	left: 0.5%;
-	width: 99%;
-	z-index: 9999;
-	display: flex;
-	flex-direction: row-reverse;
-	align-items: flex-end;
-}
 
 .source-code {
 	position: fixed;
@@ -93,17 +76,6 @@ button:hover.move-down {
 	font-style: normal;
 }
 
-.banner-buttons-left {
-	position: fixed;
-	top: 0.5%;
-	left: 0.5%;
-	width: 99%;
-	z-index: 9999;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-}
-
 p {
 	font-size: 20px;
 	padding-left: 16px;
@@ -115,27 +87,30 @@ p {
 
 }
 
+.about-container {
+	display: flex;
+	flex-direction: column;
+	background-color: #4C566A;
+	border-radius: 8px;
+	overflow: hidden;
+	width: 40%; /* Set the desired width */
+	box-sizing: border-box; /* Include padding in the width calculation */
+  }
+  
 .about-header {
-	padding-left: 16px;
-	padding-top: 10px;
-	padding-right: 10px;
-	padding-bottom: 10px;
-	border-radius: 5px 5px 0px 0px;
-	margin-bottom: 0px;
-	font-family: 'NerdFont', monospace;
-	position: absolute;
-    top: 0;
-    left: 0;
+background-color: #3B4252;
+color: #81A1C1;
+margin: 0; /* Remove default margin */
+padding-left: 16px;
 }
-.about-header,
 
-p.about {
-	max-width: 43.45%;
-	margin-top: -5px;
-
+.about {
+width: fit-content;
+margin: 0; /* Remove default margin */
 }
 
 .banner {
+	color: #81A1C1;
 	margin-left: -18px;
 	margin-right: -18px;
 	margin-top: -8px;
@@ -146,20 +121,38 @@ p.about {
 	text-align: center;
 }
 
-/*THEME*/
-body {
-	background-color: #2E3440;
-	color: #81A1C1;
+.end-body {
+	background-color: #2E3440; 
 }
 
-/*body:not(.no-oglo) {
-	background-image: url("background-dark.png");
-}*/
-
-button {
-	background-color: #8FBCBB;
+.git-button {
+	background-color: #5E81AC;
 	color: #2E3440;
-	border-bottom: 8px solid #6f9e9d;
+	border-bottom: 8px solid #4a6a92;
+}
+
+.project-button {
+	background-color: #B48EAD;
+	color: #2E3440;
+	border-bottom: 8px solid #966d8e;
+}
+
+.nix-button {
+	background-color: #A3BE8C;
+	color: #2E3440;
+	border-bottom: 8px solid #789460;
+}
+
+.cv-button {
+	background-color: #D08770;
+	color: #2E3440;
+	border-bottom: 8px solid #ad6650;
+}
+
+.linkdin-button {
+	background-color: #81A1C1;
+	color: #2E3440;
+	border-bottom: 8px solid #627f9c;
 }
 
 button:hover {
@@ -167,7 +160,18 @@ button:hover {
 	border-bottom: 8px solid #88C0D0;
 }
 
+/*THEME*/
+
+.content-container {
+	background-color: #2E3440; 
+	padding: 20px;
+	border-radius: 8px;
+	opacity: 0.8;
+}
+
+
 p {
+	color: #D8DEE9;
 	background-color: #4C566A;
 	border-bottom: 8px solid #434C5E;
 }
@@ -188,19 +192,15 @@ p {
 }
 
 
-
 /* TERMINAL */
 #terminal-container {
-    border-bottom: 8px solid #434C5E; 
-    border-radius: 8px; 
-    overflow: hidden; 
+	border-bottom: 8px solid #434C5E;
+	border-radius: 8px;
+	overflow: hidden;
 	width: 40%;
-	position: relative;
-
-	padding-left: 800px;
-	padding-top: 0px;
-	padding-bottom: 200px;
-
+	position: absolute;
+	top: 400px; /* Adjust this value to move it up or down */
+	left: 800px; /* Adjust this value to move it left or right */
 }
 
 #terminal-container .xterm-viewport {
