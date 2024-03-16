@@ -95,7 +95,7 @@ p {
 	overflow: hidden;
 	width: 40%; /* Set the desired width */
 	box-sizing: border-box; /* Include padding in the width calculation */
-  }
+}
   
 .about-header {
 background-color: #3B4252;
