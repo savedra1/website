@@ -52,20 +52,25 @@ const commands = {
 };
 
 const ABOUT = format(`
-Currently learning: 
-	- AWS Solutions Architect
-	- Devops
-	- Golang
-My desktop setup:
-	- NixOs unstable
-	- Hyprland (customised)
-	- Alacritty shell (zsh)
-Interests: 
-	- Music
-	- Movies
-	- The internet 
-	
-`);
+{
+	"Currently learning": [
+		"AWS Solutions Architecture",
+		"Devops",
+		"Golang",
+	],
+	"Desktop setup": [
+		"NixOs unstable"
+		"Hyprland (customised)"
+	 	"Alacritty shell (zsh)"
+	],
+	"Interests": [
+		"Music production",
+		"Open source software",
+		"Chess",
+		"Movies"
+	]
+}`
+);
 
 const CONTACT = format(`
 Email:   michaelsavedra@gmail.com
@@ -80,7 +85,7 @@ code visit: https://github.com/savedra1/website
 `);
 
 const files = {
-	'about.txt': ABOUT,
+	'about.json': ABOUT,
 	'contact.txt': CONTACT,
 	'README.md': README,
 };
