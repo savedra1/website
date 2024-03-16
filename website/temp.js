@@ -64,7 +64,7 @@ Interests:
 	- Music
 	- Movies
 	- The internet 
-	 
+	
 `);
 
 const CONTACT = format(`
