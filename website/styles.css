@@ -1,4 +1,20 @@
 
+/* Styles for small screens */
+@media (max-width: 600px) {
+	/* CSS rules for small screens */
+  }
+  
+/* Styles for medium screens */
+@media (min-width: 601px) and (max-width: 992px) {
+/* CSS rules for medium screens */
+}
+  
+/* Styles for large screens */
+@media (min-width: 993px) {
+/* CSS rules for large screens */
+}
+
+
 /*FONTS*/
 @font-face {
 	font-family: "NerdFont";
