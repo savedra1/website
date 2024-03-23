@@ -1,19 +1,4 @@
 
-/* Styles for small screens */
-@media (max-width: 600px) {
-	/* CSS rules for small screens */
-  }
-  
-/* Styles for medium screens */
-@media (min-width: 601px) and (max-width: 992px) {
-/* CSS rules for medium screens */
-}
-  
-/* Styles for large screens */
-@media (min-width: 993px) {
-/* CSS rules for large screens */
-}
-
 
 /*FONTS*/
 @font-face {
@@ -42,6 +27,33 @@
 	src: url("fonts/JetBrainsMonoNerdFont-BoldItalic.ttf") format("truetype");
 	font-weight: bold;
 	font-style: italic;
+}
+
+/* Styles for screens smaller than 768px (typical smartphones) */
+@media screen and (max-width: 768px) {
+	/* Your mobile styles here */
+	#terminal-container {
+		border-bottom: 8px solid #434C5E;
+		border-radius: 8px;
+		overflow: hidden;
+		width: 40%;
+		position: relative;
+	}
+}
+  
+/* Styles for screens larger than 768px (typical tablets and desktops) */
+@media screen and (min-width: 769px) {
+		/* TERMINAL */
+	#terminal-container {
+		border-bottom: 8px solid #434C5E;
+		border-radius: 8px;
+		overflow: hidden;
+		width: 40%;
+		position: absolute;
+		top: 400px; /* Adjust this value to move it up or down */
+		left: 800px; /* Adjust this value to move it left or right */
+	}
+
 }
 
 /*ELEMS*/
@@ -181,9 +193,9 @@ button:hover {
 .content-container {
 	background-color: #2E3440; 
 	padding: 20px;
-	border-radius: 8px;
+	border-radius: 4px;
 	opacity: 0.8;
-	margin-top: -17px
+	margin-top: -19px
 }
 
 p {
@@ -208,23 +220,12 @@ p {
 }
 
 
-/* TERMINAL */
-#terminal-container {
-	border-bottom: 8px solid #434C5E;
-	border-radius: 8px;
-	overflow: hidden;
-	width: 40%;
-	position: absolute;
-	top: 400px; /* Adjust this value to move it up or down */
-	left: 800px; /* Adjust this value to move it left or right */
-}
-
 #terminal-container .xterm-viewport {
     border-radius: 8px; 
 	padding-left: 10px; 
     padding-right: 10px;
 	padding-top: 30px; 
-	width: fit-content;
+	width: 100%;
 	margin: 0;
 
 }

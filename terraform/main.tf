@@ -1,19 +1,19 @@
 terraform {
   backend "s3" {
-    bucket = var.STATE_BUCKET
-    key    = var.STATE_FILE
-    region = var.AWS_REGION
+    bucket = "msavedra-state"  #var.STATE_BUCKET
+    key    = "dev/tfstate" #var.STATE_FILE
+    region = "eu-west-1"  #var.AWS_REGION
   }
 }
 
 provider "aws" {
-  region = var.AWS_REGION  # Replace with your desired AWS region
+  region = "eu-west-1" #var.AWS_REGION 
 }
 
 
 # Create S3 bucket for hosting the static website
 resource "aws_s3_bucket" "static_website" {
-  bucket = var.SITE_BUCKET  # Replace with your desired bucket name
+  bucket = "msavedra.com" #var.SITE_BUCKET  # Replace with your desired bucket name
 }
 
 
@@ -61,7 +61,6 @@ resource "aws_s3_bucket_policy" "allow_public_read" {
 }
 
 
-
 # ===== FILES
 
 resource "aws_s3_object" "index_page" {
@@ -98,3 +97,43 @@ resource "aws_s3_object" "backgroung" {
 
 }
 
+######## ROUTE 53
+
+# Create a Hosted Zone in Route 53
+resource "aws_route53_zone" "hosted_zone" {
+  name = "msavedra.com" 
+}
+
+# Create an A Record and Alias to the S3 Website Endpoint
+resource "aws_route53_record" "website_record" {
+  zone_id = aws_route53_zone.hosted_zone.zone_id
+  name    = "msavedra.com" 
+  type    = "A"
+
+  alias {
+    name                   = "s3-website-eu-west-1.amazonaws.com" #"s3-website-${var.AWS_REGION}.amazonaws.com" #aws_s3_bucket_website_configuration.website_config.
+    zone_id                = aws_s3_bucket.static_website.hosted_zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53domains_registered_domain" "my_domain" {
+  domain_name = "msavedra.com"
+
+  name_server {
+    name = aws_route53_zone.name_servers[0]
+  }
+
+  name_server {
+    name = aws_route53_zone.name_servers[1]
+  }
+
+  name_server {
+    name = aws_route53_zone.name_servers[2]
+  }
+
+  name_server {
+    name = aws_route53_zone.name_servers[3]
+  }
+
+}
