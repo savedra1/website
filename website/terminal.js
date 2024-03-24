@@ -56,11 +56,11 @@ const ABOUT = format(`
 	"Currently learning": [
 		"AWS Solutions Architecture",
 		"Devops",
-		"Golang",
+		"Go"
 	],
 	"Desktop setup": [
-		"NixOs unstable"
-		"Hyprland (customised)"
+		"NixOs unstable",
+		"Hyprland (customised)",
 	 	"Alacritty shell (zsh)"
 	],
 	"Interests": [

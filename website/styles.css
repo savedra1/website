@@ -35,9 +35,51 @@
 	#terminal-container {
 		border-bottom: 8px solid #434C5E;
 		border-radius: 8px;
+		padding-top: 20px;
 		overflow: hidden;
-		width: 40%;
-		position: relative;
+		width: 90%;
+		position: absolute;
+		left: 50%; /* Move the left edge to the middle of the screen */
+    	transform: translateX(-50%); 
+	}
+
+	body {
+		padding-left: 0px;
+		padding-right: 0px;
+		font-family: 'NerdFont', monospace;
+		font-weight: bold;
+		font-style: normal;
+		background-repeat: no-repeat;
+		background-size: contain;	
+		background-image: url('./ZE9ZvL4.png');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed; 
+		overflow-x: hidden;
+		margin: 0; 
+		height: 100vh; 
+	}
+
+	.about-container {
+		display: flex;
+		flex-direction: column;
+		background-color: #4C566A;
+		border-radius: 8px;
+		overflow: hidden;
+		width: fit-content; 
+		box-sizing: border-box; 
+	}
+
+	.content-container {
+		background-color: #2E3440; 
+		width: 100vw;
+		padding: 5px;
+		border-radius: 2px;
+		opacity: 0.8;
+		margin-top: -19px;
+		background-size: cover;
+		
 	}
 }
   
@@ -54,27 +96,44 @@
 		left: 800px; /* Adjust this value to move it left or right */
 	}
 
+	body {
+		padding-left: 0px;
+		padding-right: 0px;
+		font-family: 'NerdFont', monospace;
+		font-weight: bold;
+		font-style: normal;
+		background-repeat: no-repeat;
+		background-size: contain;
+		overflow: hidden;
+		background-image: url('./ZE9ZvL4.png');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed; 
+		margin: 0; 
+		height: 100vh; 
+	}
+
+	.about-container {
+		display: flex;
+		flex-direction: column;
+		background-color: #4C566A;
+		border-radius: 8px;
+		overflow: hidden;
+		width: 40%; /* Set the desired width */
+		box-sizing: border-box; /* Include padding in the width calculation */
+	}
+
+	.content-container {
+		background-color: #2E3440; 
+		padding: 5px;
+		border-radius: 2px;
+		opacity: 0.8;
+		margin-top: -19px
+	}
 }
 
 /*ELEMS*/
-body {
-	padding-left: 0px;
-	padding-right: 0px;
-	font-family: 'NerdFont', monospace;
-	font-weight: bold;
-	font-style: normal;
-	background-repeat: no-repeat;
-	background-size: contain;
-	overflow: hidden;
-
-	background-image: url('./ZE9ZvL4.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed; 
-	margin: 0; 
-	height: 100vh; 
-  }
 
 button {
 	padding: 10px 20px;
@@ -88,7 +147,6 @@ button {
 	font-style: normal;
 	transition: transform 0.1s ease-in-out;
 }
-
 
 .source-code {
 	position: fixed;
@@ -114,16 +172,6 @@ p {
 	font-family: 'NerdFont', monospace;
 
 }
-
-.about-container {
-	display: flex;
-	flex-direction: column;
-	background-color: #4C566A;
-	border-radius: 8px;
-	overflow: hidden;
-	width: 40%; /* Set the desired width */
-	box-sizing: border-box; /* Include padding in the width calculation */
-}
   
 .about-header {
 background-color: #3B4252;
@@ -133,8 +181,8 @@ padding-left: 16px;
 }
 
 .about {
-width: fit-content;
-margin: 0; /* Remove default margin */
+	width: fit-content;
+	margin: 0; /* Remove default margin */
 }
 
 .banner {
@@ -189,14 +237,6 @@ button:hover {
 }
 
 /*THEME*/
-
-.content-container {
-	background-color: #2E3440; 
-	padding: 20px;
-	border-radius: 4px;
-	opacity: 0.8;
-	margin-top: -19px
-}
 
 p {
 	color: #D8DEE9;
