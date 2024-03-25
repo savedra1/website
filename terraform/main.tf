@@ -1,25 +1,25 @@
 terraform {
   backend "s3" {
-    bucket = var.STATE_BUCKET
-    key    = var.STATE_FILE
-    region = var.AWS_REGION
+    bucket = vars.STATE_BUCKET
+    key    = "dev/tfstate"
+    region = "eu-west-1" #vars.AWS_REGION
   }
 }
 
 provider "aws" {
-  region     =  var.AWS_REGION 
+  region     =  vars.AWS_REGION 
 }
 
 module "route53" {
   source      = "./route53"
-  domain_name = var.DOMAIN_NAME
-  region      = var.AWS_REGION
+  domain_name = vars.DOMAIN_NAME
+  region      = vars.AWS_REGION
 
 }
 
 module "s3" {
   source           = "./s3"
-  site_bucket_name = var.SITE_BUCKET
+  site_bucket_name = vars.SITE_BUCKET
 }
 
 
