@@ -1,0 +1,48 @@
+name: Deploy website plan
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'website/*'
+
+jobs:
+  deploy-terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+
+      TF_VAR_S3_STATE_BUCKET: ${{ secrets.S3_STATE_BUCKET_NAME }}
+      TF_VAR_STATE_FILE: ${{ secrets.STATE_FILE }}
+      TF_VAR_SITE_BUCKET: ${{ secrets.SITE_BUCKET_NAME }}
+      TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
+      TF_VAR_DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+
+      TF_IN_AUTOMATION: "True"
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2 
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialise Terraform
+        run: |
+          cd terraform
+          terraform init -backend-config="bucket=${{ secrets.S3_STATE_BUCKET }}"
+          terraform apply -auto-approve
+
+  #notify-failures:  
+  #  runs-on: ubuntu-latest
+  #  environment: prod
+  #  needs: terraform
+  #  if: failure()
+  #  steps:
+  #  - name: send alert
+  #    run: |
+      
+     
