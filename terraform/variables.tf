@@ -1,5 +1,5 @@
 
-variable "AWS_REGION"       {
+variable "AWS_REGION"    {
   type        = string
   default     = "n/a"
 }
@@ -9,13 +9,17 @@ variable "STATE_BUCKET"  {
   default     = "n/a"
 }
 
-variable "STATE_FILE" {
+variable "STATE_FILE"    {
   type        = string
   default     = "n/a"
 }
 
+variable "SITE_BUCKET"   {
+  type        = string
+  default     = "n/a"
+}
 
-variable "SITE_BUCKET" {
+variable "DOMAIN_NAME"   {
   type        = string
   default     = "n/a"
 }
