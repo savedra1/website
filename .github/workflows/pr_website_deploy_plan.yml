@@ -23,7 +23,6 @@ jobs:
 
       TF_IN_AUTOMATION: "True"
       
-      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2 

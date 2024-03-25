@@ -22,8 +22,7 @@ jobs:
       TF_VAR_DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
 
       TF_IN_AUTOMATION: "True"
-      
-      
+    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2 
