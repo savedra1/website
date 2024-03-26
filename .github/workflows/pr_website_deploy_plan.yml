@@ -1,28 +1,22 @@
 name: Deploy website plan
-
 on:
   pull_request:
     branches:
       - main
     paths:
-      - 'website/*'
-
+      - website/*
 jobs:
   deploy-terraform:
     runs-on: ubuntu-latest
-
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-
       TF_VAR_S3_STATE_BUCKET: ${{ secrets.S3_STATE_BUCKET_NAME }}
       TF_VAR_STATE_FILE: ${{ secrets.STATE_FILE }}
       TF_VAR_SITE_BUCKET: ${{ secrets.SITE_BUCKET_NAME }}
       TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
       TF_VAR_DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
-
       TF_IN_AUTOMATION: "True"
-      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2 
@@ -35,7 +29,6 @@ jobs:
           cd terraform
           terraform init -backend-config="bucket=${{ secrets.S3_STATE_BUCKET }}"
           terraform plan
-    #terraform destroy -auto-approve
       
       - name: Run terraform plan
         id: plan
@@ -46,7 +39,7 @@ jobs:
           echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Comment Plan
-      id: comment-plan
+        id: comment-plan
         uses: peter-evans/create-or-update-comment@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
