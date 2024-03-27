@@ -9,7 +9,7 @@ resource "aws_route53_record" "website_record" {
 
   alias {
     name                   = "s3-website-${var.region}.amazonaws.com" 
-    zone_id                = var.zone_id
+    zone_id                = aws_route53_zone.hosted_zone.zone_id
     evaluate_target_health = true
   }
 }
