@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Terraform
         run: |
-          cd terraform
+          cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
           terraform apply -auto-approve
 
