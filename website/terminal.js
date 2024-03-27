@@ -1,5 +1,7 @@
 
-
+/* 
+	Functions
+*/
 function format(string) {
 	return string.replace('\n', '').replace(/\n/g, '\r\n');
 }
@@ -39,7 +41,9 @@ function execute(command) {
 }
 
 
-
+/* 
+	vars
+*/
 
 const PROMPT = ` ~/$ `;
 const PROMPT_LENGTH = PROMPT.length;
@@ -114,6 +118,10 @@ window.scrollTo(0, 0);
 let history = [];
 let pointer = 0;
 let command = '';
+
+/* 
+	Event listener
+*/
 
 term.onData(event => {
 	switch (event) {
