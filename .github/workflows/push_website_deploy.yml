@@ -30,7 +30,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Initialise Terraform
+      - name: Run Terraform
         run: |
           cd terraform
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
