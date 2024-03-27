@@ -26,7 +26,7 @@ jobs:
 
       - name: Terraform plan
         run: |
-          cd terraform
+          cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
           terraform plan
     
