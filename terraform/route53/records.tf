@@ -8,7 +8,7 @@ resource "aws_route53_record" "website_record" {
   type    = "A"
 
   alias {
-    name                   = "s3-website-eu-west-1.amazonaws.com" #"s3-website-${var.region}.amazonaws.com" 
+    name                   = "s3-website-${var.region}.amazonaws.com" 
     zone_id                = var.bucket_zone_id
     evaluate_target_health = false
   }
