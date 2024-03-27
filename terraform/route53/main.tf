@@ -1,3 +1,3 @@
 variable "domain_name" {}
-# variable "region" {}
-# variable "zone_id" {} # not needed
+variable "region" {}
+variable "bucket_zone_id" {} 

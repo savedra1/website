@@ -11,10 +11,10 @@ provider "aws" {
 }
 
 module "route53" {
-  source      = "./route53"
-  domain_name = var.DOMAIN_NAME
-  # region      = var.AWS_REGION
-  # zone_id = "${module.s3.route_zone_id}"
+  source         = "./route53"
+  domain_name    = var.DOMAIN_NAME
+  region         = var.AWS_REGION
+  bucket_zone_id = "${module.s3.bucket_zone_id}"
 
 }
 
@@ -22,6 +22,4 @@ module "s3" {
   source           = "./s3"
   site_bucket_name = var.SITE_BUCKET
 }
-
-
 
