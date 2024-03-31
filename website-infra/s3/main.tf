@@ -9,5 +9,5 @@ output "regional_domain" {
 }
 
 output "origin_id" {
-    value = aws_s3_bucket.static_website.bucket_domain_name  #aws_s3_bucket.static_website.bucket
+    value = aws_s3_bucket.static_website.bucket_domain_name
 }

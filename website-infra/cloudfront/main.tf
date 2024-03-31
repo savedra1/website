@@ -1,7 +1,7 @@
-variable "domain_name" {}
-variable "cert_id"     {}
-variable "regional_domain"      {}
-variable "origin_id" {}
+variable "domain_name"     {}
+variable "cert_id"         {}
+variable "regional_domain" {}
+variable "origin_id"       {}
 
 output "cloudfront_endpoint" {
     value = aws_cloudfront_distribution.cf_distribution.domain_name
