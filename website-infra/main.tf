@@ -11,15 +11,15 @@ provider "aws" {
 }
 
 module "acm" {
-  source = "./acm"
+  source      = "./acm"
   domain_name = var.DOMAIN_NAME
 }
 
 module "cf" {
-  source = "./cloudfront"
+  source      = "./cloudfront"
   domain_name = var.DOMAIN_NAME
-  cert_id = "${module.acm.cert_id}"
-  s3_endpoint = module.s3.s3_endpoint
+  cert_id     = "${module.acm.cert_id}"
+  region      = var.AWS_REGION
 }
 
 module "route53" {
