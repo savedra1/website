@@ -28,7 +28,7 @@ module "route53" {
   domain_name    = var.DOMAIN_NAME
   region         = var.AWS_REGION
   bucket_zone_id = "${module.s3.bucket_zone_id}"
-  cf_endpoint    = "${module.cf.cf_endpoint}"
+  cloudfront_endpoint    = "${module.cloudfront.cloudfront_endpoint}"
 }
 
 module "s3" {
