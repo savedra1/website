@@ -19,7 +19,8 @@ module "cf" {
   source      = "./cloudfront"
   domain_name = var.DOMAIN_NAME
   cert_id     = "${module.acm.cert_id}"
-  region      = var.AWS_REGION
+  regional_domain  = "${module.s3.regional_domain}"
+  origin_id = "${module.s3.origin_id}"
 }
 
 module "route53" {
