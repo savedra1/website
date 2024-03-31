@@ -3,3 +3,4 @@
     - Reformatted s3 bucket endpoint to remove the https:// 
     - Testing - hardcoded domain endpoint (2)
     - Testing - swapped hardcoded domain name for regional domain name var (13)
+    - Testing - added hosted zone id to record alias for DNS validation 
