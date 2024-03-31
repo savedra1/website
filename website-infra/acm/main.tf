@@ -4,6 +4,7 @@ provider "aws" {
 }
 
 variable "domain_name" {}
+variable "cert_record" {}
 
 output "cert_id" {
   value = aws_acm_certificate.domain_cert.arn

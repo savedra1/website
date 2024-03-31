@@ -13,6 +13,7 @@ provider "aws" {
 module "acm" {
   source      = "./acm"
   domain_name = var.DOMAIN_NAME
+  cert_record = module.route53.cert_record
 }
 
 module "cloudfront" {

@@ -29,7 +29,7 @@ resource "aws_route53_record" "cloudfront_record" {
 }
 
 # Cert validation
-resource "aws_route53_record" "cert_validation" {
+resource "aws_route53_record" "cert_record" {
   for_each = {
     for dvo in var.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
