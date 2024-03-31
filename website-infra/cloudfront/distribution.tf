@@ -1,7 +1,7 @@
 
 resource "aws_cloudfront_distribution" "cf_distribution" {
   origin {
-    domain_name = "${var.domain_name}.s3-website-${var.region}.amazonaws.com" 
+    domain_name = "msavedra.com.s3-website-eu-west-1.amazonaws.com"   #"${var.domain_name}.s3-website-${var.region}.amazonaws.com" 
     origin_id   = "Custom-origin"
   }
 
