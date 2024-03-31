@@ -21,7 +21,7 @@ resource "aws_route53_record" "cloudfront_record" {
   zone_id = aws_route53_zone.hosted_zone.zone_id
   name    = var.domain_name
   type    = "AAAA"
-  ttl     = "300"
+  #ttl     = "300"
   alias {
     name = var.cloudfront_endpoint
     zone_id = var.cloudfront_zone_id
