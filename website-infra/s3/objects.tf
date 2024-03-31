@@ -31,6 +31,6 @@ resource "aws_s3_object" "terminal" {
 
 resource "aws_s3_object" "backgroung" {
   bucket = aws_s3_bucket.static_website.id
-  key    = "ZE9ZvL4.png"
-  source = "../website/ZE9ZvL4.png"
+  key    = "background.png"
+  source = "../website/background.png"
 }
