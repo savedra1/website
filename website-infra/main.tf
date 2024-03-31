@@ -19,7 +19,7 @@ module "cf" {
   source = "./cloudfront"
   domain_name = var.DOMAIN_NAME
   cert_id = "${module.acm.cert_id}"
-  s3_endpoint = "${module.s3.s3_endpoint}"
+  s3_endpoint = module.s3.s3_endpoint
 }
 
 module "route53" {
