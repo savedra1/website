@@ -2,6 +2,8 @@
     The route53 record used for rerouting the s3 bucket's
     endpoint 
 */
+
+/*
 resource "aws_route53_record" "website_record" {
   zone_id = aws_route53_zone.hosted_zone.zone_id
   name    = var.domain_name 
@@ -13,12 +15,13 @@ resource "aws_route53_record" "website_record" {
     evaluate_target_health = false
   }
 }
+*/
 
 
-resource "aws_route53_record" "cf_record" {
+resource "aws_route53_record" "cloudfront_record" {
   zone_id = aws_route53_zone.hosted_zone.zone_id
   name    = var.domain_name
-  type    = "AAAA"
+  type    = "A"
   ttl     = "300"
   records = [var.cloudfront_endpoint]
 }
