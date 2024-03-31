@@ -3,6 +3,6 @@ variable "cert_id"     {}
 variable "regional_domain"      {}
 variable "origin_id" {}
 
-output "cf_endpoint" {
+output "cloudfront_endpoint" {
     value = aws_cloudfront_distribution.cf_distribution.domain_name
 }

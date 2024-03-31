@@ -2,4 +2,4 @@
     - ZE9ZvL4.png -> background.png (website-infra/s3/objects.tf) 
     - Reformatted s3 bucket endpoint to remove the https:// 
     - Testing - hardcoded domain endpoint (2)
-    - Testing - swapped hardcoded domain name for regional domain name var (11)
+    - Testing - swapped hardcoded domain name for regional domain name var (12)
