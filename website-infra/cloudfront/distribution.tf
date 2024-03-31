@@ -49,5 +49,5 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   }
 
   http_version               = "http2"
-  is_ipv6_enabled = false
+  is_ipv6_enabled = true
 }

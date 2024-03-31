@@ -24,11 +24,12 @@ module "cloudfront" {
 }
 
 module "route53" {
-  source         = "./route53"
-  domain_name    = var.DOMAIN_NAME
-  region         = var.AWS_REGION
-  bucket_zone_id = "${module.s3.bucket_zone_id}"
-  cloudfront_endpoint    = "${module.cloudfront.cloudfront_endpoint}"
+  source              = "./route53"
+  domain_name         = var.DOMAIN_NAME
+  region              = var.AWS_REGION
+  bucket_zone_id      = "${module.s3.bucket_zone_id}"
+  cloudfront_endpoint = "${module.cloudfront.cloudfront_endpoint}"
+  cloudfront_zone_id  = "${module.cloudfront.cloudfront_zone_id}"
 }
 
 module "s3" {
