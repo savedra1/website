@@ -14,10 +14,11 @@ resource "aws_route53_record" "website_record" {
   }
 }
 
+/*
 resource "aws_route53_record" "cf_record" {
   zone_id = aws_route53_zone.hosted_zone.zone_id
   name    = var.domain_name
   type    = "AAAA"
   ttl     = "300"
   #records = [var.cf_endpoint]
-}
+}*/
