@@ -10,12 +10,23 @@ provider "aws" {
   region     =  var.AWS_REGION 
 }
 
+module "acm" {
+  source = "./acm"
+  domain_name = var.DOMAIN_NAME
+}
+
+module "cf" {
+  source = "./cloudfront"
+  domain_name = var.DOMAIN_NAME
+  cert_id = "${module.acm.cert_id}"
+}
+
 module "route53" {
   source         = "./route53"
   domain_name    = var.DOMAIN_NAME
   region         = var.AWS_REGION
   bucket_zone_id = "${module.s3.bucket_zone_id}"
-
+  cf_endpoint    = "${module.cf.cf_endpoint}"
 }
 
 module "s3" {
