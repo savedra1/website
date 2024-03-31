@@ -15,13 +15,14 @@ module "acm" {
   domain_name = var.DOMAIN_NAME
 }
 
+/*
 module "cf" {
   source      = "./cloudfront"
   domain_name = var.DOMAIN_NAME
   cert_id     = "${module.acm.cert_id}"
   regional_domain  = "${module.s3.regional_domain}"
   origin_id = "${module.s3.origin_id}"
-}
+}*/
 
 module "route53" {
   source         = "./route53"
