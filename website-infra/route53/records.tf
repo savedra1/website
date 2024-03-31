@@ -19,5 +19,5 @@ resource "aws_route53_record" "cf_record" {
   name    = var.domain_name
   type    = "AAAA"
   ttl     = "300"
-  records = [var.cf_endpoint]
+  #records = [var.cf_endpoint]
 }
