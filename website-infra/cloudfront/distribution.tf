@@ -1,7 +1,7 @@
 
 resource "aws_cloudfront_distribution" "cf_distribution" {
   origin {
-    domain_name = var.domain_name
+    domain_name = var.s3_endpoint
     origin_id   = "Custom-origin"
   }
 
