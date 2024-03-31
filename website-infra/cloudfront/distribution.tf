@@ -18,7 +18,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "Custom-origin"
+    target_origin_id = var.origin_id
 
     forwarded_values {
       query_string = false
