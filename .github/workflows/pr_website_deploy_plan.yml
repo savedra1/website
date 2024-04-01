@@ -25,19 +25,31 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform plan
+      #- name: Terraform plan
+      #  run: |
+      #    cd website-infra
+      #    terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
+      #    terraform plan -out=tfplan.out > tfplan.md
+      #    mv tfplan.md $GITHUB_WORKSPACE 
+
+      - name: Run terraform plan
+        id: plan
         run: |
-          cd website-infra
-          terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
-          terraform plan -out=tfplan.out > tfplan.md
-          mv tfplan.md $GITHUB_WORKSPACE 
+          echo 'plan<<EOF' >> $GITHUB_OUTPUT
+          terraform plan -no-color -out=tfplan >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
       
       - name: Comment Plan
+        id: comment-plan
         uses: peter-evans/create-or-update-comment@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
-          body-file: tfplan.md
+          body: |
+            ```
+            ${{ steps.plan.outputs.plan }}
+            ```
+            Merge this PR to apply these changes.
      
       #- name: Comment plan
       #  uses: thollander/actions-comment-pull-request@v2
