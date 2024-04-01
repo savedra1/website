@@ -29,15 +29,15 @@ jobs:
         run: |
           cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
-          terraform plan -out=tfplan.out > tfplan.txt
-          mv tfplan.txt $GITHUB_WORKSPACE 
+          terraform plan -out=tfplan.out > tfplan.md
+          mv tfplan.md $GITHUB_WORKSPACE 
       
       - name: Comment Plan
         uses: peter-evans/create-or-update-comment@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
-          body-file: tfplan.txt
+          body-file: tfplan.md
      
       #- name: Comment plan
       #  uses: thollander/actions-comment-pull-request@v2
