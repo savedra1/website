@@ -30,7 +30,7 @@ jobs:
           cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
           terraform plan -out=tfplan.out > tfplan.txt
-          mv website-infra/tfplan.txt $GITHUB_WORKSPACE 
+          mv tfplan.txt $GITHUB_WORKSPACE 
 
   comment-plan:
     needs: run-terraform
