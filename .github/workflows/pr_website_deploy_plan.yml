@@ -32,17 +32,17 @@ jobs:
           terraform plan -out=tfplan.out > tfplan.txt
           mv tfplan.txt $GITHUB_WORKSPACE 
       
-      - name: Check for file
-        run: |
-          echo ROOT DIR:
-          ls -a
-          echo INFRA DIR:
-          cd website-infra && ls -a 
-      
-      - name: Comment plan
-        uses: thollander/actions-comment-pull-request@v2
+      - name: Comment Plan
+        uses: peter-evans/create-or-update-comment@v2
         with:
-          filePath: tfplan.txt 
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: tfplan.txt
+     
+      #- name: Comment plan
+      #  uses: thollander/actions-comment-pull-request@v2
+      #  with:
+      #    filePath: tfplan.txt 
 
   #comment-plan:
   #  needs: run-terraform
