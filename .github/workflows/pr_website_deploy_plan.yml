@@ -5,8 +5,9 @@ on:
       - main
     paths:
       - website/*
+      - website-infra/*
 jobs:
-  deploy-terraform:
+  run-terraform:
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
@@ -28,5 +29,20 @@ jobs:
         run: |
           cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
-          terraform plan
+          terraform plan -out=tfplan.out > ../tfplan.txt
+
+  comment-plan:
+    needs: run-terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2 
+      
+      - name: Comment plan
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: /tfplan.txt
+      
+      - name: Remove plan files
+        run: rm -f tfplan.txt && rm -f website-infra/tfplan.out
     
