@@ -42,7 +42,7 @@ jobs:
       - name: Comment plan
         uses: thollander/actions-comment-pull-request@v2
         with:
-          filePath: website-infra/tfplan.txt 
+          filePath: tfplan.txt 
         
       - name: Remove plan files
         run: rm -f tfplan.txt
