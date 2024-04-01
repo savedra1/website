@@ -30,8 +30,7 @@ jobs:
           cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
           terraform plan -out=tfplan.out > tfplan.txt
-          echo "UPDATED DIR CONTENTS:"
-          ls -a
+          mv website-infra/tfplan.txt $GITHUB_WORKSPACE 
 
   comment-plan:
     needs: run-terraform
@@ -43,8 +42,8 @@ jobs:
       - name: Comment plan
         uses: thollander/actions-comment-pull-request@v2
         with:
-          filePath: website-infra/tfplan.txt  # Corrected file path
+          filePath: website-infra/tfplan.txt 
         
       - name: Remove plan files
-        run: rm -f website-infra/tfplan.txt && rm -f website-infra/tfplan.out  # Adjusted file paths for removal
+        run: rm -f tfplan.txt
     
