@@ -25,24 +25,58 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform plan
+      - name: Run terraform plan
+        id: plan
         run: |
           cd website-infra
           terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
-          terraform plan -out=tfplan.out > ../tfplan.txt
-
-  comment-plan:
-    needs: run-terraform
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2 
+          echo 'plan<<EOF' >> $GITHUB_OUTPUT
+          terraform plan -no-color -out=tfplan >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
       
-      - name: Comment plan
-        uses: thollander/actions-comment-pull-request@v2
+      - name: Comment Plan # This requires repo's actions permissions to be updated to allow write token permissions
+        id: comment-plan
+        uses: peter-evans/create-or-update-comment@v4
         with:
-          filePath: /tfplan.txt
-      
-      - name: Remove plan files
-        run: rm -f tfplan.txt && rm -f website-infra/tfplan.out
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            __website-infra plan__:
+            ```shell
+            ${{ steps.plan.outputs.plan }}
+            ```
+            Merge this PR to apply these changes.
+
+    
+    # Alternate comment method from file:
+    #- name: Terraform plan
+      #  run: |
+      #    cd website-infra
+      #    terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
+      #    terraform plan -out=tfplan.out > tfplan.md
+      #    mv tfplan.md $GITHUB_WORKSPACE  
+     
+      #- name: Comment plan
+      #  uses: thollander/actions-comment-pull-request@v2
+      #  with:
+      #    filePath: tfplan.txt 
+
+      #comment-plan:
+      #  needs: run-terraform
+      #  runs-on: ubuntu-latest
+      #  steps:
+      #    - name: Checkout Repository
+      #      uses: actions/checkout@v2
+          
+          #- name: Check for file
+          #  run: |
+          #    echo ROOT DIR:
+          #    ls -a
+          #    echo INFRA DIR:
+          #    cd website-infra && ls -a 
+          #
+          #
+          #  
+          #- name: Remove plan files
+          #  run: rm -f tfplan.txt
     
