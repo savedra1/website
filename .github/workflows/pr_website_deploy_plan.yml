@@ -35,6 +35,8 @@ jobs:
       - name: Run terraform plan
         id: plan
         run: |
+          cd website-infra
+          terraform init -backend-config="bucket=${{ secrets.STATE_BUCKET }}"
           echo 'plan<<EOF' >> $GITHUB_OUTPUT
           terraform plan -no-color -out=tfplan >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
@@ -46,6 +48,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
+            __website-infra plan__:
             ```
             ${{ steps.plan.outputs.plan }}
             ```
