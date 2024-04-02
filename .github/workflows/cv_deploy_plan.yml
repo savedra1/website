@@ -1,0 +1,42 @@
+
+name: CV Deployment Plan
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - cv/*
+      - cv-infra/* 
+
+jobs:
+  build-cv:
+      runs-on: ubuntu-latest
+      env:
+        GCP_SECRET_KEY: ${{ secrets.GCP_SECRET_KEY }}
+        GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        GCP_PRIVATE_KEY_ID: ${{ secrets.GCP_PRIVATE_KEY_ID }}
+        GCP_CLIENT_ID: ${{ secrets.GCP_CLIENT_ID }}
+        GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
+        GCP_CLIENT_CERT: ${{ secrets.GCP_CLIENT_CERT }}
+        GCP_SUBJECT: ${{ secrets.GCP_SUBJECT }}
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+  
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.10'
+  
+        - name: Install dependencies
+          run: |
+            cd cv
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        
+        - name: Build PDF
+          run: |
+            cd cv
+            python main.py
