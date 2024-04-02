@@ -55,7 +55,7 @@ class Client:
         client_email   = os.getenv("GCP_CLIENT_EMAIL")
         client_id      = os.getenv("GCP_CLIENT_ID")
         client_cert    = os.getenv("GCP_CLIENT_CERT")
-        subject        = os.getenv("GCP_SUBJECT")
+        #subject        = os.getenv("GCP_SUBJECT")
         #sheet_id       = os.getenv("GOOGLE_SHEET_ID")
 
         sa_info = {
@@ -87,8 +87,8 @@ class Client:
         else:
             access_token = creds.token
 
-        print("TOKEN: ")
-        print(access_token)
+        #print("TOKEN: ")
+        #print(access_token)
 
         return access_token
 
@@ -100,11 +100,30 @@ class Client:
         )
         print("RESPONSE:\n" + response.text)
     
+    def export_as_pdf(self):
+        url = f"{self.base_url}/drive/v3/files/1KEXZPU3h4E-BetoxT_DSPvy4eOeOfxJvuMS8tdwhE-s/export"
+        query = {
+            "mimeType": "application/pdf"
+        }
+        response = requests.get(
+            url,
+            headers=self.headers,
+            params=query
+        )
+
+        print("Text Response:")
+        print(response.text)
+
+        print("Content Response:")
+        print(response.content)
+
+
+
+    
 
 if __name__ == "__main__":
 
     c = Client()
-    print(c.headers["Authorization"])
-    c.get_doc_content()
+    c.export_as_pdf()
 
 
