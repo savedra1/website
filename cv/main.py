@@ -111,12 +111,10 @@ class Client:
             params=query
         )
 
-        print("Text Response:")
-        print(response.text)
+        #print("Content Response:")
+        #print(response.content)
 
-        print("Content Response:")
-        print(response.content)
-
+        return response.content
 
 
     
@@ -124,6 +122,9 @@ class Client:
 if __name__ == "__main__":
 
     c = Client()
-    c.export_as_pdf()
+    pdf_data = c.export_as_pdf()
+    with open("cv.pdf", "wb") as pdf_file:
+        pdf_file.write(pdf_data)
+
 
 
