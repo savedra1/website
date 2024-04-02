@@ -40,7 +40,13 @@ jobs:
         run: |
           cd cv
           python main.py
-          mv cv.pdf $GITHUB_WORKSPACE
+      
+      - name: Upload CV Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cv-artifact
+          path: cv/cv.pdf
+      
   
   upload-cv:
     runs-on: ubuntu-latest
@@ -55,6 +61,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
+      - name: Download CV Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: cv-artifact
+
       - name: Check for file
         run: |
           pwd && ls -a
