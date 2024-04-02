@@ -71,9 +71,7 @@ class Client:
             "client_x509_cert_url": client_cert,
             "universe_domain": "googleapis.com"
         }
-        
-        print("SA_INFO:\n" + str(sa_info))
-        
+                
         creds = service_account.Credentials.from_service_account_info(
             info    = sa_info, 
             scopes  = scopes, 
@@ -107,6 +105,6 @@ if __name__ == "__main__":
 
     c = Client()
     print(c.headers["Authorization"])
-    #c.get_doc_content()
+    c.get_doc_content()
 
 
