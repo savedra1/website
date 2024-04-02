@@ -23,11 +23,11 @@ class Client:
     def __init__(self) -> None:
         self.headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.get_token()[]}"
+            "Authorization": f"Bearer {self.get_token()}"
         }        
         #self.session = session
         self.base_url = "https://www.googleapis.com"
-        #self.customer_id = 'C01rs1au5' # Not a secret
+        #self.customer_id = '00000' # Not a secret
 
     @staticmethod
     def get_token() -> str: 
