@@ -70,6 +70,8 @@ class Client:
             "universe_domain": "googleapis.com"
         }
 
+        print("SA INFO:\n" + str(sa_info))
+
         creds = service_account.Credentials.from_service_account_info(
             info    = sa_info, 
             scopes  = scopes, 
@@ -92,8 +94,5 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 c = Client()
-print("PRINT")
 print(c.headers["Authorization"])
 
-logger.info("LOG")
-logger.info(c.headers["Authorization"])
