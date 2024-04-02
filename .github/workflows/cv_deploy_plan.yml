@@ -57,7 +57,7 @@ jobs:
       TF_VAR_CV_STATE_BUCKET: ${{ secrets.CV_STATE_BUCKET }}
       TF_VAR_CV_BUCKET: ${{ secrets.CV_BUCKET }}
       TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
-      TF_IN_AUTOMATION: True
+      #TF_IN_AUTOMATION: True
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
