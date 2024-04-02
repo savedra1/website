@@ -55,6 +55,7 @@ class Client:
         client_id      = os.getenv("GCP_CLIENT_ID")
         client_cert    = os.getenv("GCP_CLIENT_CERT")
         subject        = os.getenv("GCP_SUBJECT")
+        #sheet_id       = os.getenv("GOOGLE_SHEET_ID")
 
         sa_info = {
             "type": "service_account",
@@ -98,6 +99,7 @@ class Client:
 
 if __name__ == "__main__":
     c = Client()
-    c.get_doc_content()
+    print(c.headers["Authorization"])
+    #c.get_doc_content()
 
 
