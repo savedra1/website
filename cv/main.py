@@ -4,6 +4,7 @@
 
 import os
 import logging
+import sys
 
 import requests
 
@@ -71,6 +72,9 @@ class Client:
             "universe_domain": "googleapis.com"
         }
 
+        print("SA_INFO:\n" + str(sa_info))
+        
+
         creds = service_account.Credentials.from_service_account_info(
             info    = sa_info, 
             scopes  = scopes, 
@@ -82,7 +86,7 @@ class Client:
                 creds.refresh(Request())
                 access_token = creds.token
             except Exception as err:
-                return err
+                sys.exit(err)
         else:
             access_token = creds.token
 
