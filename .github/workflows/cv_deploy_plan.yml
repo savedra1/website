@@ -68,11 +68,11 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
       
-       - name: Run terraform
-          run: |
-            cd cv-infra
-            terraform init -backend-config="bucket=${{ secrets.CV_BUCKET }}"
-            terraform apply -auto-approve
+      - name: Run terraform
+        run: |
+          cd cv-infra
+          terraform init -backend-config="bucket=${{ secrets.CV_BUCKET }}"
+          terraform apply -auto-approve
           
 
       
