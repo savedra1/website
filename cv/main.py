@@ -17,9 +17,6 @@ from google.auth.transport.requests import Request
     https://developers.google.com/drive/v2/reference/files/get
 """
 
-# see https://stackoverflow.com/questions/21385477/generating-a-pdf-using-google-docs-api
-
-
 class Client:
     def __init__(self) -> None:
         self.headers = {
@@ -28,7 +25,6 @@ class Client:
         }        
         #self.session = session
         self.base_url = "https://www.googleapis.com"
-        #self.customer_id = '00000' # Not a secret
 
     @staticmethod
     def get_token() -> str: 
@@ -40,13 +36,6 @@ class Client:
         scopes = [
             "https://www.googleapis.com/auth/docs",
             "https://www.googleapis.com/auth/drive",
-            #"https://www.googleapis.com/auth/drive.appdata",
-            #"https://www.googleapis.com/auth/drive.file",
-            #"https://www.googleapis.com/auth/drive.metadata",
-            #"https://www.googleapis.com/auth/drive.metadata.readonly",
-            #"https://www.googleapis.com/auth/drive.photos.readonly",
-            #"https://www.googleapis.com/auth/drive.readonly",
-            #"https://www.googleapis.com/auth/drive.apps.readonly"
         ]
         
         private_key    = os.getenv("GCP_SECRET_KEY").replace("|$|", "\n")
@@ -55,7 +44,6 @@ class Client:
         client_email   = os.getenv("GCP_CLIENT_EMAIL")
         client_id      = os.getenv("GCP_CLIENT_ID")
         client_cert    = os.getenv("GCP_CLIENT_CERT")
-        #subject        = os.getenv("GCP_SUBJECT")
         #sheet_id       = os.getenv("GOOGLE_SHEET_ID")
 
         sa_info = {
@@ -75,7 +63,6 @@ class Client:
         creds = service_account.Credentials.from_service_account_info(
             info    = sa_info, 
             scopes  = scopes, 
-            #subject = subject
         )
         
         if not creds.valid:
