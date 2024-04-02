@@ -5,6 +5,7 @@
 import os
 import logging
 import sys
+import json
 
 import requests
 
@@ -18,13 +19,14 @@ from google.auth.transport.requests import Request
 """
 
 class Client:
-    def __init__(self) -> None:
-        self.headers = {
+    def __init__(self, doc_id) -> None:
+        self.headers  = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.get_token()}"
         }        
         #self.session = session
         self.base_url = "https://www.googleapis.com"
+        self.doc_id   = doc_id
 
     @staticmethod
     def get_token() -> str: 
@@ -44,7 +46,6 @@ class Client:
         client_email   = os.getenv("GCP_CLIENT_EMAIL")
         client_id      = os.getenv("GCP_CLIENT_ID")
         client_cert    = os.getenv("GCP_CLIENT_CERT")
-        #sheet_id       = os.getenv("GOOGLE_SHEET_ID")
 
         sa_info = {
             "type": "service_account",
@@ -79,16 +80,19 @@ class Client:
 
         return access_token
 
-    def get_doc_content(self):
-        url = f"https://docs.googleapis.com/v1/documents/1KEXZPU3h4E-BetoxT_DSPvy4eOeOfxJvuMS8tdwhE-s"
+    def get_doc_content(self) -> dict:
+        url = f"https://docs.googleapis.com/v1/documents/{self.doc_id}"
         response = requests.get(
             url,
             headers = self.headers
         )
-        print("RESPONSE:\n" + response.text)
+
+        if response.status_code == 200:
+            raise Exception(response.text)
+        return json.loads(response.text)
     
     def export_as_pdf(self):
-        url = f"{self.base_url}/drive/v3/files/1KEXZPU3h4E-BetoxT_DSPvy4eOeOfxJvuMS8tdwhE-s/export"
+        url = f"{self.base_url}/drive/v3/files/{self.doc_id}/export"
         query = {
             "mimeType": "application/pdf"
         }
@@ -98,19 +102,13 @@ class Client:
             params=query
         )
 
-        #print("Content Response:")
-        #print(response.content)
+        print(response.status_code)
 
         return response.content
 
-
-    
-
 if __name__ == "__main__":
-
-    c = Client()
+    c = Client(os.getenv("GOOGLE_DOC_ID"))
     pdf_data = c.export_as_pdf()
-    print("PWD: " + os.getcwd())
     with open("cv.pdf", "wb") as pdf_file:
         pdf_file.write(pdf_data)
 
