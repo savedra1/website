@@ -92,5 +92,8 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 c = Client()
-print(c.headers)
-logger.info(c.headers)
+print("PRINT")
+print(c.headers["Authorization"])
+
+logger.info("LOG")
+logger.info(c.headers["Authorization"])
