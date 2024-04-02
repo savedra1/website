@@ -38,5 +38,6 @@ jobs:
         
         - name: Build PDF
           run: |
-            cd cv/src
+            cd cv
             python main.py
+            ls -a 
