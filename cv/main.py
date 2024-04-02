@@ -23,7 +23,7 @@ class Client:
     def __init__(self) -> None:
         self.headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.get_service()}"
+            "Authorization": f"Bearer {self.get_token()}"
         }        
         #self.session = session
         self.base_url = "https://www.googleapis.com"
