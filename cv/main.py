@@ -110,6 +110,7 @@ if __name__ == "__main__":
 
     c = Client()
     pdf_data = c.export_as_pdf()
+    print("PWD: " + os.getcwd())
     with open("cv.pdf", "wb") as pdf_file:
         pdf_file.write(pdf_data)
 
