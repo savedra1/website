@@ -102,6 +102,9 @@ class Client:
         return response.content
 
 if __name__ == "__main__":
+    print("GOOG DOC ID:")
+    print(os.getenv("GOOGLE_DOC_ID"))
+    raise Exception('failed')
     c = Client(os.getenv("GOOGLE_DOC_ID"))
     pdf_data = c.export_as_pdf()
     with open("cv.pdf", "wb") as pdf_file:
