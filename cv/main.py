@@ -48,14 +48,13 @@ class Client:
             "https://www.googleapis.com/auth/drive.apps.readonly"
         ]
         
-        private_key    = os.getenv("GCP_PRIVATE_KEY").replace("$", "\n")
+        private_key    = os.getenv("GCP_SECRET_KEY").replace("$", "\n")
         private_key_id = os.getenv("GCP_PRIVATE_KEY_ID")
         project_id     = os.getenv("GCP_PROJECT_ID")
         client_email   = os.getenv("GCP_CLIENT_EMAIL")
         client_id      = os.getenv("GCP_CLIENT_ID")
         client_cert    = os.getenv("GCP_CLIENT_CERT")
         subject        = os.getenv("GCP_SUBJECT")
-
 
         sa_info = {
             "type": "service_account",
