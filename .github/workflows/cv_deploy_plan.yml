@@ -57,8 +57,8 @@ jobs:
       
       - name: Check for file
         run: |
-          pwd
-          cd cv && pwd
+          pwd && ls -a
+          cd cv && pwd && ls -a
 
 
         
