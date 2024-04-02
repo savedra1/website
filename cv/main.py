@@ -39,13 +39,13 @@ class Client:
         scopes = [
             "https://www.googleapis.com/auth/docs",
             "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly",
-            "https://www.googleapis.com/auth/drive.apps.readonly"
+            #"https://www.googleapis.com/auth/drive.appdata",
+            #"https://www.googleapis.com/auth/drive.file",
+            #"https://www.googleapis.com/auth/drive.metadata",
+            #"https://www.googleapis.com/auth/drive.metadata.readonly",
+            #"https://www.googleapis.com/auth/drive.photos.readonly",
+            #"https://www.googleapis.com/auth/drive.readonly",
+            #"https://www.googleapis.com/auth/drive.apps.readonly"
         ]
         
         private_key    = os.getenv("GCP_SECRET_KEY").replace("$", "\n")
@@ -82,7 +82,6 @@ class Client:
                 creds.refresh(Request())
                 access_token = creds.token
             except Exception as err:
-                print("ERR:\n" + err)
                 return err
         else:
             access_token = creds.token
