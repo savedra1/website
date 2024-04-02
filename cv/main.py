@@ -4,6 +4,8 @@
 
 import os
 import logging
+import sys
+import json
 
 import requests
 
@@ -16,18 +18,15 @@ from google.auth.transport.requests import Request
     https://developers.google.com/drive/v2/reference/files/get
 """
 
-# see https://stackoverflow.com/questions/21385477/generating-a-pdf-using-google-docs-api
-
-
 class Client:
-    def __init__(self) -> None:
-        self.headers = {
+    def __init__(self, doc_id) -> None:
+        self.headers  = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.get_service()}"
+            "Authorization": f"Bearer {self.get_token()}"
         }        
         #self.session = session
         self.base_url = "https://www.googleapis.com"
-        #self.customer_id = 'C01rs1au5' # Not a secret
+        self.doc_id   = doc_id
 
     @staticmethod
     def get_token() -> str: 
@@ -39,23 +38,14 @@ class Client:
         scopes = [
             "https://www.googleapis.com/auth/docs",
             "https://www.googleapis.com/auth/drive",
-            "https://www.googleapis.com/auth/drive.appdata",
-            "https://www.googleapis.com/auth/drive.file",
-            "https://www.googleapis.com/auth/drive.metadata",
-            "https://www.googleapis.com/auth/drive.metadata.readonly",
-            "https://www.googleapis.com/auth/drive.photos.readonly",
-            "https://www.googleapis.com/auth/drive.readonly",
-            "https://www.googleapis.com/auth/drive.apps.readonly"
         ]
         
-        private_key    = os.getenv("GCP_PRIVATE_KEY").replace("$", "\n")
+        private_key    = os.getenv("GCP_SECRET_KEY").replace("|$|", "\n")
         private_key_id = os.getenv("GCP_PRIVATE_KEY_ID")
         project_id     = os.getenv("GCP_PROJECT_ID")
         client_email   = os.getenv("GCP_CLIENT_EMAIL")
         client_id      = os.getenv("GCP_CLIENT_ID")
         client_cert    = os.getenv("GCP_CLIENT_CERT")
-        subject        = os.getenv("GCP_SUBJECT")
-
 
         sa_info = {
             "type": "service_account",
@@ -70,11 +60,10 @@ class Client:
             "client_x509_cert_url": client_cert,
             "universe_domain": "googleapis.com"
         }
-
+                
         creds = service_account.Credentials.from_service_account_info(
             info    = sa_info, 
             scopes  = scopes, 
-            subject = subject
         )
         
         if not creds.valid:
@@ -82,16 +71,46 @@ class Client:
                 creds.refresh(Request())
                 access_token = creds.token
             except Exception as err:
-                return err
+                sys.exit(err)
         else:
             access_token = creds.token
 
+        #print("TOKEN: ")
+        #print(access_token)
+
         return access_token
+
+    def get_doc_content(self) -> dict:
+        url = f"https://docs.googleapis.com/v1/documents/{self.doc_id}"
+        response = requests.get(
+            url,
+            headers = self.headers
+        )
+
+        if response.status_code == 200:
+            raise Exception(response.text)
+        return json.loads(response.text)
     
+    def export_as_pdf(self):
+        url = f"{self.base_url}/drive/v3/files/{self.doc_id}/export"
+        query = {
+            "mimeType": "application/pdf"
+        }
+        response = requests.get(
+            url,
+            headers=self.headers,
+            params=query
+        )
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+        print(response.status_code)
 
-c = Client()
-print(c.headers)
-logger.info(c.headers)
+        return response.content
+
+if __name__ == "__main__":
+    c = Client(os.getenv("GOOGLE_DOC_ID"))
+    pdf_data = c.export_as_pdf()
+    with open("cv.pdf", "wb") as pdf_file:
+        pdf_file.write(pdf_data)
+
+
+
