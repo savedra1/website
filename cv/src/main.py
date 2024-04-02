@@ -23,7 +23,7 @@ class Client:
     def __init__(self) -> None:
         self.headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.get_token()}"
+            "Authorization": f"Bearer {self.get_token()[]}"
         }        
         #self.session = session
         self.base_url = "https://www.googleapis.com"
@@ -70,8 +70,6 @@ class Client:
             "universe_domain": "googleapis.com"
         }
 
-        print("SA INFO:\n" + str(sa_info))
-
         creds = service_account.Credentials.from_service_account_info(
             info    = sa_info, 
             scopes  = scopes, 
@@ -88,11 +86,18 @@ class Client:
             access_token = creds.token
 
         return access_token
+
+    def get_doc_content(self):
+        url = f"https://docs.googleapis.com/v1/documents/1KEXZPU3h4E-BetoxT_DSPvy4eOeOfxJvuMS8tdwhE-s"
+        response = requests.get(
+            url,
+            headers = self.headers
+        )
+        print("RESPONSE:\n" + response.text)
     
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+if __name__ == "__main__":
+    c = Client()
+    c.get_doc_content()
 
-c = Client()
-print(c.headers["Authorization"])
 
