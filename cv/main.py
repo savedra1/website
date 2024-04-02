@@ -82,9 +82,13 @@ class Client:
                 creds.refresh(Request())
                 access_token = creds.token
             except Exception as err:
+                print("ERR:\n" + err)
                 return err
         else:
             access_token = creds.token
+
+        print("TOKEN: ")
+        print(access_token)
 
         return access_token
 
