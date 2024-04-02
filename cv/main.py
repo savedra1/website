@@ -13,11 +13,6 @@ from google.oauth2.credentials import Credentials
 from google.oauth2 import service_account
 from google.auth.transport.requests import Request 
 
-"""
-    https://developers.google.com/drive/v2/reference/files/insert 
-    https://developers.google.com/drive/v2/reference/files/get
-"""
-
 class Client:
     def __init__(self, doc_id) -> None:
         self.headers  = {
@@ -92,7 +87,7 @@ class Client:
         return json.loads(response.text)
     
     def export_as_pdf(self):
-        url = f"{self.base_url}/drive/v3/files/1KEXZPU3h4E-BetoxT_DSPvy4eOeOfxJvuMS8tdwhE-s"#{self.doc_id}/export"
+        url = f"{self.base_url}/drive/v3/files/{self.doc_id}/export"
         query = {
             "mimeType": "application/pdf"
         }
@@ -102,8 +97,8 @@ class Client:
             params=query
         )
 
-        print(response.status_code)
-
+        if response.status_code != 200:
+            raise Exception(response.text)
         return response.content
 
 if __name__ == "__main__":

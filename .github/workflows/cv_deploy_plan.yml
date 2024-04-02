@@ -56,6 +56,7 @@ jobs:
       TF_VAR_CV_STATE_BUCKET: ${{ secrets.CV_STATE_BUCKET }}
       TF_VAR_CV_BUCKET: ${{ secrets.CV_BUCKET }}
       TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -71,7 +72,7 @@ jobs:
       - name: Run terraform
         run: |
           cd cv-infra
-          terraform init -backend-config="bucket=${{ secrets.CV_BUCKET }}"
+          terraform init -backend-config="bucket=${{ secrets.CV_STATE_BUCKET }}"
           terraform apply -auto-approve
           
 
