@@ -19,7 +19,7 @@ jobs:
       GCP_CLIENT_ID: ${{ secrets.GCP_CLIENT_ID }}
       GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
       GCP_CLIENT_CERT: ${{ secrets.GCP_CLIENT_CERT }}
-      GCP_SUBJECT: ${{ secrets.GCP_SUBJECT }}
+      GOOGLE_DOC_ID: ${{ secrets.GOOGLE_DOC_ID }}
 
     steps:
       - name: Checkout repository
@@ -56,6 +56,7 @@ jobs:
       TF_VAR_CV_STATE_BUCKET: ${{ secrets.CV_STATE_BUCKET }}
       TF_VAR_CV_BUCKET: ${{ secrets.CV_BUCKET }}
       TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -71,7 +72,7 @@ jobs:
       - name: Run terraform
         run: |
           cd cv-infra
-          terraform init -backend-config="bucket=${{ secrets.CV_BUCKET }}"
+          terraform init -backend-config="bucket=${{ secrets.CV_STATE_BUCKET }}"
           terraform apply -auto-approve
           
 

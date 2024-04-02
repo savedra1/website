@@ -1,5 +1,6 @@
 TODO
 
-cv pdf build form google doc
-terraform deployment 
+Get https sorted for CV?
 readme
+
+TF Module for easily spinning up a static site with HTTPS. 

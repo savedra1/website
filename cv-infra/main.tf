@@ -69,3 +69,4 @@ resource "aws_s3_object" "error_page" {
   etag   = filemd5("../cv.pdf")
   content_type = "application/pdf"
 }
+##
