@@ -11,33 +11,55 @@ on:
 
 jobs:
   build-cv:
-      runs-on: ubuntu-latest
-      env:
-        GCP_SECRET_KEY: ${{ secrets.GCP_SECRET_KEY }}
-        GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-        GCP_PRIVATE_KEY_ID: ${{ secrets.GCP_PRIVATE_KEY_ID }}
-        GCP_CLIENT_ID: ${{ secrets.GCP_CLIENT_ID }}
-        GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
-        GCP_CLIENT_CERT: ${{ secrets.GCP_CLIENT_CERT }}
-        GCP_SUBJECT: ${{ secrets.GCP_SUBJECT }}
+    runs-on: ubuntu-latest
+    env:
+      GCP_SECRET_KEY: ${{ secrets.GCP_SECRET_KEY }}
+      GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      GCP_PRIVATE_KEY_ID: ${{ secrets.GCP_PRIVATE_KEY_ID }}
+      GCP_CLIENT_ID: ${{ secrets.GCP_CLIENT_ID }}
+      GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
+      GCP_CLIENT_CERT: ${{ secrets.GCP_CLIENT_CERT }}
+      GCP_SUBJECT: ${{ secrets.GCP_SUBJECT }}
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          cd cv
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Build PDF
+        run: |
+          cd cv
+          python main.py
+          mv cv.pdf $GITHUB_WORKSPACE
   
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.10'
-  
-        - name: Install dependencies
-          run: |
-            cd cv
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+  upload-cv:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      TF_VAR_CV_STATE_BUCKET: ${{ secrets.CV_STATE_BUCKET }}
+      TF_VAR_CV_BUCKET: ${{ secrets.CV_BUCKET }}
+      TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Check for file
+        run: |
+          pwd
+          cd cv && pwd
+
+
         
-        - name: Build PDF
-          run: |
-            cd cv
-            python main.py
-            ls -a 
+            
