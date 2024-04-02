@@ -28,6 +28,7 @@ resource "aws_s3_bucket_public_access_block" "cv_bucket_public_access_block" {
   restrict_public_buckets = false
 }
 
+# Index doc for site config
 resource "aws_s3_bucket_website_configuration" "website_config" {
   bucket = aws_s3_bucket.cv_bucket.id
 
@@ -36,6 +37,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
   }
 }
 
+# Public access policy (dynamic so always shows as a planned change)
 data "aws_iam_policy_document" "allow_public_read" {
   statement {
     sid       = "PublicReadGetObject"
@@ -53,7 +55,17 @@ data "aws_iam_policy_document" "allow_public_read" {
   }
 }
 
+# Attach policy to bucket
 resource "aws_s3_bucket_policy" "allow_public_read" {
   bucket = aws_s3_bucket.cv_bucket.id
   policy = data.aws_iam_policy_document.allow_public_read.json
+}
+
+# Index file object
+resource "aws_s3_object" "error_page" {
+  bucket = aws_s3_bucket.cv_bucket.id
+  key    = "cv.pdf"
+  source = "../cv.pdf"
+  etag   = filemd5("../cv.pdf")
+  content_type = "application/pdf"
 }
