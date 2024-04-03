@@ -15,3 +15,7 @@
     
 - Updated Actions workflow to comment TF plan output to the PR (2)
 - Reformatted TF linting
+
+## 02/04
+
+- Switched CV url to terraform-managed PDF hosted in s3
