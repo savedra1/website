@@ -6,6 +6,9 @@ from google.oauth2 import service_account
 from google.auth.transport.requests import Request 
 
 class Client:
+    """
+    GCP API Client used for handling files.
+    """
     def __init__(self, session, doc_id) -> None:
         self.headers  = {
             "Content-Type": "application/json",
@@ -66,6 +69,10 @@ class Client:
         return access_token
 
     def get_doc_content(self) -> dict:
+        """
+        Returns all content and metadata form a google doc
+        in json format.
+        """
         url = f"https://docs.googleapis.com/v1/documents/{self.doc_id}"
         response = self.session.get(
             url,
@@ -77,6 +84,10 @@ class Client:
         return json.loads(response.text)
     
     def export_as_pdf(self) -> bytes:
+        """
+        Returns byte data for a pdf, exported from and file
+        with the users' drive, specefied by file id.
+        """
         url = f"{self.base_url}/drive/v3/files/{self.doc_id}/export"
         query = {
             "mimeType": "application/pdf"

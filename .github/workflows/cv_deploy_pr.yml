@@ -69,7 +69,7 @@ jobs:
           terraform plan -no-color -out=tfplan >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
       
-      - name: Comment Plan # This requires repo's actions permissions to be updated to allow write token permissions
+      - name: Comment Plan # Requires repo permissions for actions automation
         id: comment-plan
         uses: peter-evans/create-or-update-comment@v4
         with:
