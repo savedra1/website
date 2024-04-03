@@ -1,11 +1,12 @@
-name: Deploy website plan
+name: Deploy TF changes on merge
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'website/*'
+      - website/*
+      - website-infra/*
 
 jobs:
   deploy-terraform:
