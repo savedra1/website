@@ -1,5 +1,5 @@
 
-name: CV Deployment on merge
+name: CV Deployment checks on PR
 
 on:
   pull_request:
@@ -59,15 +59,25 @@ jobs:
         uses: hashicorp/setup-terraform@v3
       
       - name: Run terraform
+        id: plan
         run: |
           cd cv-infra
-          touch ../cv.pdf
+          touch cv.pdf
+          mv cv.pdf $GITHUB_WORKSPACE
           terraform init -backend-config="bucket=${{ secrets.CV_STATE_BUCKET }}"
-          terraform plan
-          
-
+          echo 'plan<<EOF' >> $GITHUB_OUTPUT
+          terraform plan -no-color -out=tfplan >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
       
-
-
-        
-            
+      - name: Comment Plan # This requires repo's actions permissions to be updated to allow write token permissions
+        id: comment-plan
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            __website-infra plan__:
+            ```shell
+            ${{ steps.plan.outputs.plan }}
+            ```
+            Merge this PR to apply these changes.
