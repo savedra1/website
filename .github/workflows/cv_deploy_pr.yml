@@ -61,6 +61,7 @@ jobs:
       - name: Run terraform
         run: |
           cd cv-infra
+          touch ../cv.pdf
           terraform init -backend-config="bucket=${{ secrets.CV_STATE_BUCKET }}"
           terraform plan
           
