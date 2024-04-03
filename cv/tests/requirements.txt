@@ -1,4 +1,3 @@
-requests
 pytest
 google-auth
 google-auth-httplib2
