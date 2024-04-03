@@ -29,7 +29,7 @@ def sa_info():
     }
 
 # Test Google API access
-def test_google_access(sa_info, scopes, subject):
+def test_google_access(sa_info, scopes):
     """
     Test to ensure all current scopes are still active and
     main service account can still be used to access the api
@@ -39,7 +39,7 @@ def test_google_access(sa_info, scopes, subject):
         info = sa_info, 
         scopes = scopes, 
     )
-    
+
     if not creds.valid:
         creds.refresh(Request())
         access_token = creds.token
