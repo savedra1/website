@@ -4,8 +4,8 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   default_root_object = "index.html"
 
   origin {
-    domain_name = var.regional_domain #"msavedra.com.s3-website-eu-west-1.amazonaws.com"   #"${var.domain_name}.s3-website-${var.region}.amazonaws.com" 
-    origin_id   = var.origin_id #"Custom-origin"
+    domain_name = var.regional_domain # the public endpoint for the website bucket
+    origin_id   = var.origin_id
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.static_site.cloudfront_access_identity_path
     }
