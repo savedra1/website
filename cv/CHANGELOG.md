@@ -4,4 +4,4 @@
 - Added aws infra for cv bucket
 - Created actions workflow to deploy cv infra
 - Built python automation to write PDF data to bucket form a Google Doc
-- Terraform rebuild on push test
+- Terraform rebuild on push test (2)
