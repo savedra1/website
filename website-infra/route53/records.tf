@@ -41,7 +41,7 @@ resource "aws_route53_record" "website_record" {
   type    = "A"
 
   alias {
-    name                   = "s3-website-${var.region}.amazonaws.com" 
+    name                   = var.cloudfront_endpoint 
     zone_id                = var.bucket_zone_id
     evaluate_target_health = false
   }
