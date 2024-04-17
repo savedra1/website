@@ -42,7 +42,7 @@ resource "aws_route53_record" "website_record" {
 
   alias {
     name                   = var.cloudfront_endpoint 
-    zone_id                = var.bucket_zone_id
+    zone_id                = "us-east-1"
     evaluate_target_health = false
   }
 }
