@@ -34,7 +34,6 @@ resource "aws_route53_record" "cert_record" {
   zone_id         = aws_route53_zone.hosted_zone.zone_id
 }
 
-# For HTTP only via s3 bucket endpoint
 resource "aws_route53_record" "website_record" { 
   zone_id = aws_route53_zone.hosted_zone.zone_id
   name    = var.domain_name 
@@ -42,7 +41,7 @@ resource "aws_route53_record" "website_record" {
 
   alias {
     name                   = var.cloudfront_endpoint 
-    zone_id                = "us-east-1"
+    zone_id                = var.cloudfront_zone_id
     evaluate_target_health = false
   }
 }
