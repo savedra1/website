@@ -6,8 +6,8 @@ on:
     branches:
       - main
     paths:
-      - cv/*
-      - cv-infra/* 
+      - cv/**
+      - cv-infra/** 
 
 jobs:
   build-cv:

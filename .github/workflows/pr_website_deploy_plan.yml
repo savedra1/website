@@ -4,8 +4,8 @@ on:
     branches:
       - main
     paths:
-      - website/*
-      - website-infra/*
+      - website/**
+      - website-infra/**
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest

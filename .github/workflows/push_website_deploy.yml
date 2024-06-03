@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - website/*
-      - website-infra/*
+      - website/**
+      - website-infra/**
 
 jobs:
   deploy-terraform:
