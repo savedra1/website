@@ -20,3 +20,8 @@
 
 - Switched CV url to terraform-managed PDF hosted in s3
 - Corrected href for cv url to include 'https://'
+
+## 21/07
+
+- Update links
+- Update banner

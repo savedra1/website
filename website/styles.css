@@ -212,7 +212,7 @@ padding-left: 16px;
 	border-bottom: 8px solid #966d8e;
 }
 
-.nix-button {
+.simple-site-button {
 	background-color: #A3BE8C;
 	color: #2E3440;
 	border-bottom: 8px solid #789460;
@@ -228,6 +228,12 @@ padding-left: 16px;
 	background-color: #81A1C1;
 	color: #2E3440;
 	border-bottom: 8px solid #627f9c;
+}
+
+.source-button {
+	background-color: #BF616A;
+	color: #2E3440;
+	border-bottom: 8px solid #c4525d;
 }
 
 button:hover {
@@ -254,6 +260,7 @@ p {
 .banner {
 	background-color: #4C566A;
 	border-bottom: 8px solid #434C5E;
+	padding-top: 10px;
 }
 
 
